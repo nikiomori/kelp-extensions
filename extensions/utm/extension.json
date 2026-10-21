@@ -1,0 +1,58 @@
+{
+  "id": "utm",
+  "name": "Virtual Machines (UTM)",
+  "version": "1.0.0",
+  "description": "Start, stop and suspend UTM virtual machines.",
+  "icon": "desktopcomputer",
+  "requires": [
+    "/Applications/UTM.app/Contents/MacOS/utmctl"
+  ],
+  "contributes": {
+    "panels": [
+      {
+        "id": "vms",
+        "title": "Virtual Machines",
+        "icon": "desktopcomputer",
+        "list": {
+          "title": "${name}",
+          "command": "/Applications/UTM.app/Contents/MacOS/utmctl list | awk 'NR>1 {u=$1; st=$2; $1=\"\"; $2=\"\"; sub(/^ +/, \"\"); printf \"{\\\"uuid\\\":\\\"%s\\\",\\\"status\\\":\\\"%s\\\",\\\"name\\\":\\\"%s\\\"}\\n\", u, st, $0}'",
+          "refresh": 5,
+          "subtitle": "${status}",
+          "icon": "desktopcomputer",
+          "status": {
+            "field": "status",
+            "map": {
+              "paused": "idle",
+              "started": "working",
+              "starting": "waiting",
+              "stopped": "done"
+            }
+          },
+          "empty": "No virtual machines",
+          "actions": [
+            {
+              "title": "Start",
+              "icon": "play",
+              "run": "/Applications/UTM.app/Contents/MacOS/utmctl start ${uuid}"
+            },
+            {
+              "title": "Stop",
+              "icon": "stop",
+              "run": "/Applications/UTM.app/Contents/MacOS/utmctl stop ${uuid}"
+            },
+            {
+              "title": "Suspend",
+              "icon": "pause",
+              "run": "/Applications/UTM.app/Contents/MacOS/utmctl suspend ${uuid}"
+            },
+            {
+              "title": "Show in UTM",
+              "icon": "macwindow",
+              "run": "open -a UTM"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "id": "ports",
+  "name": "Ports",
+  "version": "1.0.0",
+  "description": "Servers listening on this Mac — open them in a browser tab or stop them.",
+  "icon": "network",
+  "requires": [
+    "lsof"
+  ],
+  "contributes": {
+    "panels": [
+      {
+        "id": "listening",
+        "title": "Ports",
+        "icon": "network",
+        "list": {
+          "title": "localhost:${port}",
+          "command": "lsof -nP -iTCP -sTCP:LISTEN | awk 'NR>1 {n=split($9,a,\":\"); k=$1\":\"a[n]; if (!(k in s)) {s[k]=1; printf \"{\\\"command\\\":\\\"%s\\\",\\\"pid\\\":\\\"%s\\\",\\\"port\\\":\\\"%s\\\"}\\n\", $1, $2, a[n]}}'",
+          "refresh": 5,
+          "subtitle": "${command} · pid ${pid}",
+          "icon": "network",
+          "empty": "Nothing is listening",
+          "actions": [
+            {
+              "title": "Open in Browser",
+              "icon": "safari",
+              "open": "http://localhost:${port}"
+            },
+            {
+              "title": "Stop",
+              "icon": "stop.circle",
+              "run": "kill ${pid}",
+              "confirm": "Stop ${command} (port ${port})?"
+            },
+            {
+              "title": "Ask Agent What This Is",
+              "icon": "sparkles",
+              "agent": "Something (${command}, pid ${pid}) is listening on port ${port}. Find out what it is and whether it belongs to this project."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

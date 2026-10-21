@@ -1,0 +1,69 @@
+[
+  {
+    "id": "android-emulators",
+    "name": "Android Emulators",
+    "version": "1.0.0",
+    "description": "Launch AVDs, cold boot or wipe them; adb devices and logcat.",
+    "icon": "candybarphone",
+    "requires": [
+      "emulator"
+    ],
+    "source": "https://github.com/nikiomori/kelp-extensions/tree/android-emulators-1.0.0/extensions/android-emulators"
+  },
+  {
+    "id": "docker",
+    "name": "Docker",
+    "version": "1.0.0",
+    "description": "Containers: logs, a shell inside, start / stop, and compose.",
+    "icon": "shippingbox",
+    "requires": [
+      "docker"
+    ],
+    "source": "https://github.com/nikiomori/kelp-extensions/tree/docker-1.0.0/extensions/docker"
+  },
+  {
+    "id": "ios-simulators",
+    "name": "iOS Simulators",
+    "version": "1.0.0",
+    "description": "Boot, open and erase simulators; stream their logs.",
+    "icon": "iphone",
+    "requires": [
+      "xcrun",
+      "python3"
+    ],
+    "source": "https://github.com/nikiomori/kelp-extensions/tree/ios-simulators-1.0.0/extensions/ios-simulators"
+  },
+  {
+    "id": "ports",
+    "name": "Ports",
+    "version": "1.0.0",
+    "description": "Servers listening on this Mac — open them in a browser tab or stop them.",
+    "icon": "network",
+    "requires": [
+      "lsof"
+    ],
+    "source": "https://github.com/nikiomori/kelp-extensions/tree/ports-1.0.0/extensions/ports"
+  },
+  {
+    "id": "tart",
+    "name": "Virtual Machines (Tart)",
+    "version": "1.0.0",
+    "description": "macOS and Linux VMs with Tart: run, stop, SSH in.",
+    "icon": "shippingbox.circle",
+    "requires": [
+      "tart"
+    ],
+    "source": "https://github.com/nikiomori/kelp-extensions/tree/tart-1.0.0/extensions/tart"
+  },
+  {
+    "id": "utm",
+    "name": "Virtual Machines (UTM)",
+    "version": "1.0.0",
+    "description": "Start, stop and suspend UTM virtual machines.",
+    "icon": "desktopcomputer",
+    "requires": [
+      "/Applications/UTM.app/Contents/MacOS/utmctl"
+    ],
+    "source": "https://github.com/nikiomori/kelp-extensions/tree/utm-1.0.0/extensions/utm"
+  }
+]

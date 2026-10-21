@@ -1,0 +1,29 @@
+name: Library
+
+# Pull requests: every extension is checked, one that changed needs a new version, and index.json must be current.
+# main (or Run workflow): each extension gets the tag <id>-<version> its index entry points at.
+on:
+  pull_request:
+  push:
+    branches: [main]
+    paths: ["extensions/**", "scripts/**", "index.json", ".github/workflows/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Check
+        if: github.event_name == 'pull_request'
+        run: python3 scripts/index.py --check --base origin/${{ github.base_ref }}
+      - name: Tag
+        if: github.event_name != 'pull_request'
+        run: |
+          python3 scripts/index.py --tag
+          git push origin --tags
