@@ -1,12 +1,13 @@
 name: Library
 
 # Pull requests: every extension is checked, and one that changed needs a new version.
-# main: index.json is written again (each extension at the commit that last changed it) and committed.
+# main (or Run workflow): index.json is written again (each extension at the commit that last changed it) and committed.
 on:
   pull_request:
   push:
     branches: [main]
-    paths: ["extensions/**", "scripts/**"]
+    paths: ["extensions/**", "scripts/**", ".github/workflows/**"]
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -22,7 +23,7 @@ jobs:
         if: github.event_name == 'pull_request'
         run: python3 scripts/index.py --check --base origin/${{ github.base_ref }}
       - name: Write index.json
-        if: github.event_name == 'push'
+        if: github.event_name != 'pull_request'
         run: |
           python3 scripts/index.py
           git diff --quiet index.json && exit 0
