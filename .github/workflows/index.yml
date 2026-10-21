@@ -1,0 +1,32 @@
+name: Library
+
+# Pull requests: every extension is checked, and one that changed needs a new version.
+# main: index.json is written again (each extension at the commit that last changed it) and committed.
+on:
+  pull_request:
+  push:
+    branches: [main]
+    paths: ["extensions/**", "scripts/**"]
+
+permissions:
+  contents: write
+
+jobs:
+  index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Check
+        if: github.event_name == 'pull_request'
+        run: python3 scripts/index.py --check --base origin/${{ github.base_ref }}
+      - name: Write index.json
+        if: github.event_name == 'push'
+        run: |
+          python3 scripts/index.py
+          git diff --quiet index.json && exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "index.json" index.json
+          git push

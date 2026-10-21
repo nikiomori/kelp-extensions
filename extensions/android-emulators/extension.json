@@ -1,0 +1,56 @@
+{
+  "id": "android-emulators",
+  "name": "Android Emulators",
+  "version": "1.0.0",
+  "description": "Launch AVDs, cold boot or wipe them; adb devices and logcat.",
+  "icon": "candybarphone",
+  "requires": [
+    "emulator"
+  ],
+  "contributes": {
+    "panels": [
+      {
+        "id": "avds",
+        "title": "Emulators",
+        "icon": "candybarphone",
+        "list": {
+          "title": "${name}",
+          "command": "emulator -list-avds | awk 'NF && $0 !~ /^INFO/ {printf \"{\\\"name\\\":\\\"%s\\\"}\\n\", $0}'",
+          "refresh": 0,
+          "icon": "candybarphone",
+          "empty": "No virtual devices — create one in Android Studio",
+          "actions": [
+            {
+              "title": "Launch",
+              "icon": "play",
+              "terminal": "emulator -avd ${name}"
+            },
+            {
+              "title": "Cold Boot",
+              "icon": "power",
+              "terminal": "emulator -avd ${name} -no-snapshot-load"
+            },
+            {
+              "title": "Wipe Data",
+              "icon": "trash",
+              "terminal": "emulator -avd ${name} -wipe-data",
+              "confirm": "Wipe all data of ${name}?"
+            }
+          ],
+          "toolbar": [
+            {
+              "title": "Devices",
+              "icon": "list.bullet",
+              "terminal": "adb devices -l"
+            },
+            {
+              "title": "Logcat",
+              "icon": "text.alignleft",
+              "terminal": "adb logcat"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

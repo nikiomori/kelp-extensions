@@ -1,0 +1,58 @@
+{
+  "id": "tart",
+  "name": "Virtual Machines (Tart)",
+  "version": "1.0.0",
+  "description": "macOS and Linux VMs with Tart: run, stop, SSH in.",
+  "icon": "shippingbox.circle",
+  "requires": [
+    "tart"
+  ],
+  "contributes": {
+    "panels": [
+      {
+        "id": "vms",
+        "title": "Tart VMs",
+        "icon": "shippingbox.circle",
+        "list": {
+          "title": "${Name}",
+          "command": "tart list --format json",
+          "refresh": 5,
+          "subtitle": "${Source} · ${State} · ${Disk} GB",
+          "icon": "shippingbox.circle",
+          "status": {
+            "field": "State",
+            "map": {
+              "running": "working",
+              "stopped": "done",
+              "suspended": "idle"
+            }
+          },
+          "empty": "No VMs — `tart clone` one",
+          "actions": [
+            {
+              "title": "Run",
+              "icon": "play",
+              "terminal": "tart run ${Name}"
+            },
+            {
+              "title": "SSH",
+              "icon": "terminal",
+              "terminal": "ssh admin@$(tart ip ${Name})"
+            },
+            {
+              "title": "Stop",
+              "icon": "stop",
+              "run": "tart stop ${Name}"
+            },
+            {
+              "title": "Delete",
+              "icon": "trash",
+              "run": "tart delete ${Name}",
+              "confirm": "Delete the VM ${Name}?"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

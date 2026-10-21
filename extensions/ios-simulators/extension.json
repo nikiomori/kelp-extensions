@@ -1,0 +1,59 @@
+{
+  "id": "ios-simulators",
+  "name": "iOS Simulators",
+  "version": "1.0.0",
+  "description": "Boot, open and erase simulators; stream their logs.",
+  "icon": "iphone",
+  "requires": [
+    "xcrun",
+    "python3"
+  ],
+  "contributes": {
+    "panels": [
+      {
+        "id": "devices",
+        "title": "Simulators",
+        "icon": "iphone",
+        "list": {
+          "title": "${name}",
+          "command": "xcrun simctl list devices available -j | python3 -c \"import json,sys; [print(json.dumps(dict(d, runtime=r.split('.')[-1].replace('-', ' ', 1).replace('-', '.')))) for r, ds in json.load(sys.stdin)['devices'].items() for d in ds]\"",
+          "refresh": 10,
+          "subtitle": "${runtime} · ${state}",
+          "icon": "iphone",
+          "status": {
+            "field": "state",
+            "map": {
+              "Booted": "working",
+              "Booting": "waiting",
+              "Shutdown": "idle"
+            }
+          },
+          "empty": "No simulators",
+          "actions": [
+            {
+              "title": "Boot & Open",
+              "icon": "play",
+              "run": "xcrun simctl boot ${udid} 2>/dev/null; open -a Simulator"
+            },
+            {
+              "title": "Shut Down",
+              "icon": "stop",
+              "run": "xcrun simctl shutdown ${udid}"
+            },
+            {
+              "title": "Stream Logs",
+              "icon": "text.alignleft",
+              "terminal": "xcrun simctl spawn ${udid} log stream --level info"
+            },
+            {
+              "title": "Erase",
+              "icon": "trash",
+              "run": "xcrun simctl erase ${udid}",
+              "confirm": "Erase all content and settings of ${name}?"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

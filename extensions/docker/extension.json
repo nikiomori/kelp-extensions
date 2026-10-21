@@ -1,0 +1,96 @@
+{
+  "id": "docker",
+  "name": "Docker",
+  "version": "1.0.0",
+  "description": "Containers: logs, a shell inside, start / stop, and compose.",
+  "icon": "shippingbox",
+  "requires": [
+    "docker"
+  ],
+  "contributes": {
+    "panels": [
+      {
+        "id": "containers",
+        "title": "Containers",
+        "icon": "shippingbox",
+        "list": {
+          "title": "${Names}",
+          "command": "docker ps -a --format '{{json .}}'",
+          "refresh": 5,
+          "subtitle": "${Image} · ${Status}",
+          "icon": "shippingbox",
+          "status": {
+            "field": "State",
+            "map": {
+              "created": "idle",
+              "dead": "ended",
+              "exited": "done",
+              "paused": "idle",
+              "restarting": "waiting",
+              "running": "working"
+            }
+          },
+          "empty": "No containers",
+          "actions": [
+            {
+              "title": "Logs",
+              "icon": "text.alignleft",
+              "terminal": "docker logs -f --tail 200 ${ID}"
+            },
+            {
+              "title": "Open Shell",
+              "icon": "terminal",
+              "terminal": "docker exec -it ${ID} sh -c 'command -v bash >/dev/null && exec bash || exec sh'"
+            },
+            {
+              "title": "Start",
+              "icon": "play",
+              "run": "docker start ${ID}"
+            },
+            {
+              "title": "Stop",
+              "icon": "stop",
+              "run": "docker stop ${ID}"
+            },
+            {
+              "title": "Restart",
+              "icon": "arrow.clockwise",
+              "run": "docker restart ${ID}"
+            },
+            {
+              "title": "Remove",
+              "icon": "trash",
+              "run": "docker rm -f ${ID}",
+              "confirm": "Remove the container ${Names}?"
+            },
+            {
+              "title": "Ask Agent About It",
+              "icon": "sparkles",
+              "agent": "Look at the Docker container ${Names} (image ${Image}, ${Status}). Read its logs with `docker logs --tail 200 ${ID}` and tell me what's going on."
+            }
+          ],
+          "toolbar": [
+            {
+              "title": "Compose Up",
+              "icon": "play.rectangle",
+              "terminal": "docker compose up"
+            },
+            {
+              "title": "Prune",
+              "icon": "trash",
+              "terminal": "docker system prune",
+              "confirm": "Remove stopped containers, unused networks and dangling images?"
+            }
+          ]
+        }
+      }
+    ],
+    "commands": [
+      {
+        "id": "docker.compose.up",
+        "title": "Docker: Compose Up",
+        "terminal": "docker compose up"
+      }
+    ]
+  }
+}
