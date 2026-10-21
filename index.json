@@ -45,6 +45,17 @@
     "source": "https://github.com/nikiomori/kelp-extensions/tree/ports-1.0.0/extensions/ports"
   },
   {
+    "id": "reprise",
+    "name": "Reprise",
+    "version": "1.0.0",
+    "description": "Calls recorded with Reprise: read the transcript, play the call, have an agent sum it up.",
+    "icon": "waveform",
+    "requires": [
+      "jq"
+    ],
+    "source": "https://github.com/nikiomori/kelp-extensions/tree/reprise-1.0.0/extensions/reprise"
+  },
+  {
     "id": "tart",
     "name": "Virtual Machines (Tart)",
     "version": "1.0.0",

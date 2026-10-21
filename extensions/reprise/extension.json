@@ -1,0 +1,70 @@
+{
+  "id": "reprise",
+  "name": "Reprise",
+  "version": "1.0.0",
+  "description": "Calls recorded with Reprise: read the transcript, play the call, have an agent sum it up.",
+  "icon": "waveform",
+  "requires": [
+    "jq"
+  ],
+  "contributes": {
+    "panels": [
+      {
+        "id": "calls",
+        "title": "Calls",
+        "icon": "waveform",
+        "list": {
+          "command": "d=${setting:reprise.folder}; [[ -n $d ]] || d=$HOME/Movies/Reprise; jq -c --arg t \"$(print -rl -- $d/*/transcript.txt(N:h))\" '($t | split(\"\\n\")) as $ts | (input_filename | rtrimstr(\"/recording.json\")) as $p | {title: (.title // .id), path: $p, app: (.app.name // \"\"), when: (.startedAt | try (fromdate | strflocaltime(\"%Y-%m-%d %H:%M\")) catch .), length: ((.duration // 0) | if . < 60 then \"\\(round) s\" elif . < 3600 then \"\\(. / 60 | round) min\" else \"\\(. / 3600 | floor) h \\(. / 60 | round % 60) min\" end), transcript: any($ts[]; . == $p)} | .about = ([.when, .length, (if .app != \"\" and (.app as $a | .title | contains($a) | not) then .app else \"\" end), (if .transcript then \"transcript\" else \"\" end)] | map(select(. != \"\")) | join(\" · \"))' $d/*/recording.json(NOn[1,100]) </dev/null",
+          "refresh": 30,
+          "title": "${title}",
+          "subtitle": "${about}",
+          "icon": "waveform",
+          "empty": "No calls yet",
+          "actions": [
+            {
+              "title": "Open Transcript",
+              "icon": "text.alignleft",
+              "open": "${path}/transcript.txt"
+            },
+            {
+              "title": "Sum It Up With Agent",
+              "icon": "sparkles",
+              "agent": "Read the transcript of the call “${title}” (${when}, ${length}, ${app}): ${path}/transcript.txt. transcript.json next to it says who said what and when, recording.json who was invited. Sum it up: what was decided, the action items and who owns them, the open questions, and what of it concerns this project. If there's no transcript, tell me to transcribe the call in Reprise first."
+            },
+            {
+              "title": "Play",
+              "icon": "play",
+              "run": "open ${path}/audio.m4a"
+            },
+            {
+              "title": "Copy Transcript",
+              "icon": "doc.on.doc",
+              "run": "pbcopy < ${path}/transcript.txt"
+            },
+            {
+              "title": "Show in Finder",
+              "icon": "folder",
+              "run": "open -R ${path}"
+            }
+          ],
+          "toolbar": [
+            {
+              "title": "Open Reprise",
+              "icon": "waveform",
+              "run": "open -b dev.nikiomori.reprise"
+            }
+          ]
+        }
+      }
+    ],
+    "settings": [
+      {
+        "key": "reprise.folder",
+        "title": "Calls folder",
+        "type": "string",
+        "default": "",
+        "description": "Where Reprise saves calls, if you changed it in Reprise › Settings › General › Saved in. Empty: Movies › Reprise."
+      }
+    ]
+  }
+}
