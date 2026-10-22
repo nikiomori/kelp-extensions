@@ -34,6 +34,17 @@
     "source": "https://github.com/nikiomori/kelp-extensions/tree/ios-simulators-1.0.0/extensions/ios-simulators"
   },
   {
+    "id": "make",
+    "name": "Make",
+    "version": "1.0.0",
+    "description": "Makefile targets of the workspace — run them, dry-run them, or hand a failing one to an agent.",
+    "icon": "hammer",
+    "requires": [
+      "make"
+    ],
+    "source": "https://github.com/nikiomori/kelp-extensions/tree/make-1.0.0/extensions/make"
+  },
+  {
     "id": "ports",
     "name": "Ports",
     "version": "1.0.0",

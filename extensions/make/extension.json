@@ -1,0 +1,64 @@
+{
+  "id": "make",
+  "name": "Make",
+  "version": "1.0.0",
+  "description": "Makefile targets of the workspace — run them, dry-run them, or hand a failing one to an agent.",
+  "icon": "hammer",
+  "requires": [
+    "make"
+  ],
+  "contributes": {
+    "panels": [
+      {
+        "id": "targets",
+        "title": "Make",
+        "icon": "hammer",
+        "list": {
+          "title": "${target}",
+          "command": "make -pRrq : 2>/dev/null | awk '\n/^MAKEFILE_LIST :?= / { mk = $0; sub(/^[^=]*= */, \"\", mk) }\n/^# Files/ { files = 1 }\n/^# Finished Make data base/ { files = 0 }\n/^# Not a target:/ { skip = 1; next }\nfiles && /^[^#\\t]/ { if (!skip && !/^[.%]/) { sub(/:.*/, \"\"); t[++n] = $0 } skip = 0 }\nEND {\n  m = split(mk, f, \" \")\n  for (i = 1; i <= m; i++) while ((getline l < f[i]) > 0) if (l ~ /^[^#\\t][^:=]*:.*## /) {\n    s = l; sub(/.*## */, \"\", s); gsub(/\\\\/, \"\\\\\\\\\", s); gsub(/\"/, \"\\\\\\\"\", s)\n    sub(/:.*/, \"\", l); k = split(l, ts, \" \"); for (j = 1; j <= k; j++) d[ts[j]] = s\n  }\n  for (i = 1; i <= n; i++) printf \"{\\\"target\\\":\\\"%s\\\",\\\"description\\\":\\\"%s\\\"}\\n\", t[i], d[t[i]]\n}' | sort",
+          "refresh": 10,
+          "subtitle": "${description}",
+          "icon": "hammer",
+          "empty": "No Makefile here",
+          "actions": [
+            {
+              "title": "Run",
+              "icon": "play",
+              "terminal": "make ${target}"
+            },
+            {
+              "title": "Dry Run",
+              "icon": "eye",
+              "terminal": "make -n ${target}"
+            },
+            {
+              "title": "Ask Agent to Fix",
+              "icon": "sparkles",
+              "agent": "Run `make ${target}` and fix whatever makes it fail."
+            }
+          ],
+          "toolbar": [
+            {
+              "title": "Make",
+              "icon": "play",
+              "terminal": "make"
+            },
+            {
+              "title": "Open Makefile",
+              "icon": "doc.text",
+              "open": "${workspace.path}/Makefile"
+            }
+          ]
+        }
+      }
+    ],
+    "commands": [
+      {
+        "id": "make.default",
+        "title": "Make: Run Default Target",
+        "terminal": "make",
+        "menu": "Run"
+      }
+    ]
+  }
+}
