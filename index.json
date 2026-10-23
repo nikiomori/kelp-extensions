@@ -78,6 +78,14 @@
     "source": "https://github.com/nikiomori/kelp-extensions/tree/tart-1.0.0/extensions/tart"
   },
   {
+    "id": "tidepool-icons",
+    "name": "Tidepool Icons",
+    "version": "1.0.0",
+    "description": "File icons with a colored tag per language — TS, PY, GO, {} — and tinted folders for sources, tests, docs and dependencies.",
+    "icon": "tag",
+    "source": "https://github.com/nikiomori/kelp-extensions/tree/tidepool-icons-1.0.0/extensions/tidepool-icons"
+  },
+  {
     "id": "utm",
     "name": "Virtual Machines (UTM)",
     "version": "1.0.0",

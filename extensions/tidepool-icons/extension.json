@@ -1,0 +1,16 @@
+{
+  "id": "tidepool-icons",
+  "name": "Tidepool Icons",
+  "version": "1.0.0",
+  "description": "File icons with a colored tag per language — TS, PY, GO, {} — and tinted folders for sources, tests, docs and dependencies.",
+  "icon": "tag",
+  "contributes": {
+    "iconThemes": [
+      {
+        "id": "tidepool",
+        "label": "Tidepool",
+        "path": "theme.json"
+      }
+    ]
+  }
+}
