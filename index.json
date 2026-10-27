@@ -8,6 +8,7 @@
     "requires": [
       "emulator"
     ],
+    "category": "tools",
     "source": "https://github.com/nikiomori/kelp-extensions/tree/android-emulators-1.0.0/extensions/android-emulators"
   },
   {
@@ -19,6 +20,7 @@
     "requires": [
       "docker"
     ],
+    "category": "tools",
     "source": "https://github.com/nikiomori/kelp-extensions/tree/docker-1.0.0/extensions/docker"
   },
   {
@@ -31,6 +33,7 @@
       "xcrun",
       "python3"
     ],
+    "category": "tools",
     "source": "https://github.com/nikiomori/kelp-extensions/tree/ios-simulators-1.0.0/extensions/ios-simulators"
   },
   {
@@ -42,6 +45,7 @@
     "requires": [
       "make"
     ],
+    "category": "tools",
     "source": "https://github.com/nikiomori/kelp-extensions/tree/make-1.0.0/extensions/make"
   },
   {
@@ -53,6 +57,7 @@
     "requires": [
       "lsof"
     ],
+    "category": "tools",
     "source": "https://github.com/nikiomori/kelp-extensions/tree/ports-1.0.0/extensions/ports"
   },
   {
@@ -64,6 +69,7 @@
     "requires": [
       "jq"
     ],
+    "category": "tools",
     "source": "https://github.com/nikiomori/kelp-extensions/tree/reprise-1.0.0/extensions/reprise"
   },
   {
@@ -75,6 +81,7 @@
     "requires": [
       "tart"
     ],
+    "category": "tools",
     "source": "https://github.com/nikiomori/kelp-extensions/tree/tart-1.0.0/extensions/tart"
   },
   {
@@ -83,6 +90,7 @@
     "version": "1.0.0",
     "description": "File icons with a colored tag per language — TS, PY, GO, {} — and tinted folders for sources, tests, docs and dependencies.",
     "icon": "tag",
+    "category": "icons",
     "source": "https://github.com/nikiomori/kelp-extensions/tree/tidepool-icons-1.0.0/extensions/tidepool-icons"
   },
   {
@@ -94,6 +102,7 @@
     "requires": [
       "/Applications/UTM.app/Contents/MacOS/utmctl"
     ],
+    "category": "tools",
     "source": "https://github.com/nikiomori/kelp-extensions/tree/utm-1.0.0/extensions/utm"
   }
 ]

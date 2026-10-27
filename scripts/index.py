@@ -20,11 +20,26 @@ REPO = os.environ.get("GITHUB_REPOSITORY", "nikiomori/kelp-extensions")
 ID = re.compile(r"[a-z0-9][a-z0-9.-]*")
 VERSION = re.compile(r"\d+\.\d+\.\d+")
 CONTRIBUTES = {"panels", "editors", "commands", "settings", "themes", "iconThemes", "agents", "languages"}
+# What Kelp's library filters by. "integrations" (a service: CI, chat, a tracker) is only ever said; the rest follow from
+# what an extension adds when it doesn't say.
+CATEGORIES = {"tools", "themes", "icons", "languages", "agents", "integrations"}
 MAX_FILE = 1_000_000
 
 
 def git(*args):
     return subprocess.run(["git", *args], cwd=ROOT, check=True, capture_output=True, text=True).stdout.strip()
+
+
+def category(m):
+    """The extension's own "category", or the one its contributions make it: only themes, only icon themes,
+    languages or agents; anything else is a tool."""
+    if "category" in m:
+        return m["category"]
+    c = set(m.get("contributes") or {})
+    for kinds, name in (({"themes"}, "themes"), ({"iconThemes"}, "icons")):
+        if c and c <= kinds:
+            return name
+    return "languages" if "languages" in c else "agents" if "agents" in c else "tools"
 
 
 def problems(folder, m):
@@ -39,6 +54,8 @@ def problems(folder, m):
         out.append('"version" must look like 1.0.0')
     if "icon" in m and not isinstance(m["icon"], str):
         out.append('"icon" is an SF Symbol name')
+    if "category" in m and m["category"] not in CATEGORIES:
+        out.append(f'"category" is one of {", ".join(sorted(CATEGORIES))}')
     if "requires" in m and not (isinstance(m["requires"], list) and all(isinstance(r, str) for r in m["requires"])):
         out.append('"requires" is a list of commands')
     c = m.get("contributes")
@@ -110,7 +127,7 @@ def main():
         failed = failed or bool(found)
         if not found:
             entries.append({k: m[k] for k in ("id", "name", "version", "description", "icon", "requires") if k in m}
-                           | {"source": f"https://github.com/{REPO}/tree/{folder}-{m['version']}/extensions/{folder}"})
+                           | {"category": category(m), "source": f"https://github.com/{REPO}/tree/{folder}-{m['version']}/extensions/{folder}"})
     if failed:
         sys.exit(1)
     index = json.dumps(entries, indent=2, ensure_ascii=False) + "\n"

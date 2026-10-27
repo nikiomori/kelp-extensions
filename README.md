@@ -19,7 +19,10 @@ Kelp (Claude Code) writes one when you ask for it.
 
 1. Fork this repo and add `extensions/<id>/`:
    - `extension.json` — its `id` is the folder's name; `name`, `version` (`1.0.0`) and `description` are required.
-     List the commands it needs in `requires` (e.g. `["docker"]`).
+     List the commands it needs in `requires` (e.g. `["docker"]`). The library files it under a `category`: `tools`,
+     `themes`, `icons`, `languages`, `agents` or `integrations`. Leave it out and it follows from what the extension
+     adds (only themes: `themes`, only icon themes: `icons`, languages, agents, else `tools`); say `integrations` for one
+     that connects a service.
    - `README.md` — what it adds and what it needs.
    - Any HTML or scripts it uses. No binaries, symlinks or files over 1 MB.
 2. Try it: `kelp ext install ./extensions/<id>`.
