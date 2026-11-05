@@ -1,0 +1,26 @@
+name: Community
+
+# Once a day: community.json, the extensions on GitHub under the topic kelp-extension (not reviewed here).
+on:
+  schedule:
+    - cron: "17 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  community:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Write community.json
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/community.py
+      - name: Commit it when it changed
+        run: |
+          git diff --quiet community.json && exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add community.json && git commit -m "community.json: today's kelp-extension repositories" && git push

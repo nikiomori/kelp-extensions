@@ -1,7 +1,7 @@
 {
   "id": "ports",
   "name": "Ports",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Servers listening on this Mac — open them in a browser tab or stop them.",
   "icon": "network",
   "requires": [

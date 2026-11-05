@@ -2,98 +2,273 @@
   {
     "id": "android-emulators",
     "name": "Android Emulators",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Launch AVDs, cold boot or wipe them; adb devices and logcat.",
     "icon": "candybarphone",
     "requires": [
       "emulator"
     ],
-    "source": "https://github.com/nikiomori/kelp-extensions/tree/android-emulators-1.0.0/extensions/android-emulators"
+    "source": "https://github.com/nikiomori/kelp-extensions/tree/android-emulators-1.0.1/extensions/android-emulators",
+    "files": {
+      "README.md": "8390a543fe119f0d664d716b8dad9462b8a0fca1b3f6ce4778271a3caec8a1e5",
+      "RECIPE.md": "0d6310bd93a49d644fe6a3064a571fe7a7503147a2013c4f06a23a788806b320",
+      "extension.json": "6579e61e31a9b1b905f828e478a459499950461ed5cc091224a1ba9766559e0b"
+    }
+  },
+  {
+    "id": "clauth",
+    "name": "clauth",
+    "version": "1.0.0",
+    "description": "Claude Code accounts: switch, and watch each one's 5-hour and weekly usage.",
+    "icon": "person.2",
+    "requires": [
+      "clauth"
+    ],
+    "source": "https://github.com/nikiomori/kelp-extensions/tree/clauth-1.0.0/extensions/clauth",
+    "files": {
+      "README.md": "ef653f8bdb45185268013d4d9935b652557e2796e9fd4c4519f7dbbea172d4df",
+      "RECIPE.md": "88ae8697de6c56ca2203a835851ba226d0c052a58266cc3355409b5fca29647c",
+      "extension.json": "6e68a217d598a9d0b670fce7a94dc5ce3783c4c39a9c0bec234bbfaf4e675ab6"
+    }
   },
   {
     "id": "docker",
     "name": "Docker",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Containers: logs, a shell inside, start / stop, and compose.",
     "icon": "shippingbox",
     "requires": [
       "docker"
     ],
-    "source": "https://github.com/nikiomori/kelp-extensions/tree/docker-1.0.0/extensions/docker"
+    "source": "https://github.com/nikiomori/kelp-extensions/tree/docker-1.0.1/extensions/docker",
+    "files": {
+      "README.md": "151f52bb147a3f70261fe863a20d52d465dcaa2025dafaae212625572d671ec1",
+      "RECIPE.md": "3030c3dfebcca7e5e616f279c1782d597f38cc75d0d5c478d0026c2226be1a52",
+      "extension.json": "0f6af19196e0e01d05140abd90a35a54a0da11a44921cc6f761f00f75600e9e4"
+    }
   },
   {
     "id": "ios-simulators",
     "name": "iOS Simulators",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Boot, open and erase simulators; stream their logs.",
     "icon": "iphone",
     "requires": [
       "xcrun",
       "python3"
     ],
-    "source": "https://github.com/nikiomori/kelp-extensions/tree/ios-simulators-1.0.0/extensions/ios-simulators"
+    "source": "https://github.com/nikiomori/kelp-extensions/tree/ios-simulators-1.0.1/extensions/ios-simulators",
+    "files": {
+      "README.md": "17efcce580a172d344dcc5af73c865e2c2fc857f75ff6ddd2e4b27b82eb70754",
+      "RECIPE.md": "c81c8b22fcb667ffde3c6e6e666eaacb185c14e00e000db67a850ad21a586ed5",
+      "extension.json": "e5f77e22f1f12095ecc77b387171c14aead6b5ed1a265f3ce04627ec55c9fb72"
+    }
+  },
+  {
+    "id": "lazygit",
+    "name": "lazygit",
+    "version": "1.0.0",
+    "description": "lazygit, the git TUI, in a tab on the workspace's folder.",
+    "icon": "arrow.triangle.branch",
+    "requires": [
+      "lazygit"
+    ],
+    "source": "https://github.com/nikiomori/kelp-extensions/tree/lazygit-1.0.0/extensions/lazygit",
+    "files": {
+      "README.md": "0fdc1ca3c2a6cd6d357ec88814799eec837cc3d45d9481b5505bad4577873f70",
+      "RECIPE.md": "f3239c8d66dbf3a9b574ead827c5f710de6478ba0aa70175b60d4e253669cfac",
+      "extension.json": "ab55e94997d55709ed22de63898d6fa920d45d9f670e6e459cfa0ea8eec2e6f8"
+    }
   },
   {
     "id": "make",
     "name": "Make",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Makefile targets of the workspace — run them, dry-run them, or hand a failing one to an agent.",
     "icon": "hammer",
     "requires": [
       "make"
     ],
-    "source": "https://github.com/nikiomori/kelp-extensions/tree/make-1.0.0/extensions/make"
+    "source": "https://github.com/nikiomori/kelp-extensions/tree/make-1.0.1/extensions/make",
+    "files": {
+      "README.md": "b1e8f9deee0b392f8e6f7b8a68850d0c75709d7b9a6f060c144c66cbb8bb3724",
+      "RECIPE.md": "40db2292c902bfaa1e58a207ab1598fd195ab0f6d5a47152421dba2a7df2d1ad",
+      "extension.json": "42044db4a37c9db1fcc6cff14d81a801503210d5865ace29f3ab5e7fdd340464"
+    }
+  },
+  {
+    "id": "memex",
+    "name": "Memex",
+    "version": "1.0.0",
+    "description": "Search and browse what your agents said before, across projects.",
+    "icon": "magnifyingglass",
+    "requires": [
+      "memex"
+    ],
+    "source": "https://github.com/nikiomori/kelp-extensions/tree/memex-1.0.0/extensions/memex",
+    "files": {
+      "README.md": "67fd70695980a1b2d204d6d2fc77c475cdbf68fa7a2286b8d99e97221b7b3938",
+      "RECIPE.md": "2ab35b5f1eb3112db2bb76f6e04bd1e1948febecc774eb8050146af6e1b181f9",
+      "extension.json": "36d8e491f3eea26a2dd326da296c247f93a1c28c318722cae64a3ed96ae02d66"
+    }
   },
   {
     "id": "ports",
     "name": "Ports",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Servers listening on this Mac — open them in a browser tab or stop them.",
     "icon": "network",
     "requires": [
       "lsof"
     ],
-    "source": "https://github.com/nikiomori/kelp-extensions/tree/ports-1.0.0/extensions/ports"
+    "source": "https://github.com/nikiomori/kelp-extensions/tree/ports-1.0.1/extensions/ports",
+    "files": {
+      "README.md": "6863435969d774ce444041d0270a7bab1d1860392c4d955ad7cc589aad818120",
+      "RECIPE.md": "907154474a4533e4a99bb4a0b07fcd795240dc33124db627cd171e50a7e5f774",
+      "extension.json": "7d32c395e222baf0907a58a02857c9e7f6a0143d081ae468bfdd648a9c607cf4"
+    }
   },
   {
     "id": "reprise",
     "name": "Reprise",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Calls recorded with Reprise: read the transcript, play the call, have an agent sum it up.",
     "icon": "waveform",
     "requires": [
       "jq"
     ],
-    "source": "https://github.com/nikiomori/kelp-extensions/tree/reprise-1.0.0/extensions/reprise"
+    "source": "https://github.com/nikiomori/kelp-extensions/tree/reprise-1.0.1/extensions/reprise",
+    "files": {
+      "README.md": "4e27e98afd1fee7657d7373ddfa12cce61813129b2306534984f598bd2c4237a",
+      "RECIPE.md": "5f8ae9e657d8bc5501fc2fa60c0baad54371610d2082c470a82596fefa24d4f2",
+      "extension.json": "115762f4649e492633faf97dc08732eb5d6e9ca66de49194ee0523430c27d03b"
+    }
   },
   {
     "id": "tart",
     "name": "Virtual Machines (Tart)",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "macOS and Linux VMs with Tart: run, stop, SSH in.",
     "icon": "shippingbox.circle",
     "requires": [
       "tart"
     ],
-    "source": "https://github.com/nikiomori/kelp-extensions/tree/tart-1.0.0/extensions/tart"
+    "source": "https://github.com/nikiomori/kelp-extensions/tree/tart-1.0.1/extensions/tart",
+    "files": {
+      "README.md": "a6852db148a1f3357d8a918957c5bc66164c8bf0bc61cac5edef03d9831d90d9",
+      "RECIPE.md": "179aa1e5ab210142b1aa3794ba309fd2375c59581a64305639e3a3ae9af442dc",
+      "extension.json": "2c6d46c511d6d6b8fae38414669c099d8cf2c585a22c376be6027d2e075f84ac"
+    }
   },
   {
     "id": "tidepool-icons",
     "name": "Tidepool Icons",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "File icons with a colored tag per language — TS, PY, GO, {} — and tinted folders for sources, tests, docs and dependencies.",
     "icon": "tag",
-    "source": "https://github.com/nikiomori/kelp-extensions/tree/tidepool-icons-1.0.0/extensions/tidepool-icons"
+    "source": "https://github.com/nikiomori/kelp-extensions/tree/tidepool-icons-1.0.1/extensions/tidepool-icons",
+    "files": {
+      "README.md": "7f8e72344145295eb3edc4571a90f94f8fb95a40aabe008528472e55637de5c9",
+      "RECIPE.md": "d446f45d4fa07e14a43c4f7d6a50bb60b00932f2f3889aa50c9bc47d9248a80b",
+      "extension.json": "0c0e34bdf39b3823073519b1de7a189fbdba28eca547a7963f9a39bb9632b19d",
+      "generate.py": "7c6eec4f7a3253a1438c92e95320ad3ee1d6e728920ad9209c06fd49e30a9d83",
+      "icons/c.svg": "83a74b37654c2d28eb7d2689f00115bd7040f67a648a8b9ccbab9a11648e00c0",
+      "icons/cfg.svg": "0acc67de6ae5990656be60942f165728339986137403f8649780a65f22e0ba1a",
+      "icons/cpp.svg": "b86753d6ffbcc64789e002795c7c958172a4fd2dbfec81c2e23dddc2446808e0",
+      "icons/cs.svg": "c4c82513ce2a36d9c52885df3e2b8f1ddf4ba6c7d17020459981e0c238554447",
+      "icons/css.svg": "289ef6984de815f1afeee7d9445e142945783724b0d708ca7073c86872625460",
+      "icons/csv.svg": "02d85c8313f4fb358953ea285ae6139336bc43290194ca6dd5bcb9de262d8ffc",
+      "icons/db.svg": "6b37e18918f5ffda25ea6af916dc82e1c03ea6b713e57eddff8d75fdc9a596dc",
+      "icons/docker.svg": "99fac7bafc382be81212d29777fe03bf8e09fcbbb207fe834b5ae76fa1ea0425",
+      "icons/env.svg": "1ca5b021c92595dd9a51a7ee7e6a4a1b910508223dc2e7a23ad839532a382b91",
+      "icons/file.svg": "9f5af1c92b43b5d909fa4488e7b833fd60211fdbdadd6d2a1de0701ade4239a7",
+      "icons/folder-assets-open.svg": "b3090238b941d9f7d117f447881de47e59cb61308277e5a22739405718a67991",
+      "icons/folder-assets.svg": "44ae42dd960742c81c1bb34599e4340b0b67b0719ac6e6ff820f1d680cd6f742",
+      "icons/folder-deps-open.svg": "444367c57627a231b866fa3ed9efa6562f0169cfcc80fc679b3d888cb856fcf3",
+      "icons/folder-deps.svg": "90e0f4670629bdb39239dc7fdb511330c389159241a95ca3aeeaaa646a2568bf",
+      "icons/folder-docs-open.svg": "a6a67fcef55909d8a5a6d9fa3f836a6261b85cc3fb2202024ab5f9081e2da155",
+      "icons/folder-docs.svg": "588eb4d43aa1fb77f961e89badeadbe6368d26f65ced4183efb0878884fc7b3d",
+      "icons/folder-git-open.svg": "6ca2d5bd135db65c7a467b0a4cdca0781756f77dcbec9ca2040a47f423a0f7ee",
+      "icons/folder-git.svg": "9c9ee35d8cea2166570ad3a174da981cbf23b1e743fd272c191cf5b1066b08e8",
+      "icons/folder-open.svg": "80e767b46d64ab54937df03253f079230a18fd9a8ddbfc2c8eb9208e55e33daa",
+      "icons/folder-scripts-open.svg": "4dac060a4cc70efdf7eb69343e503703a821b8f3d4020a677dd6958df5a40406",
+      "icons/folder-scripts.svg": "79286819da8482d79489ad5dbca3d7fb18f91654843e397a1bbdf77f124ff6e0",
+      "icons/folder-src-open.svg": "c4bc103d34766be31abb42f16f9ea6b3663cdeb56d2ee46bccee77dfedf67346",
+      "icons/folder-src.svg": "e9b328d17caebb94373d5b99f3f657c525b92c73d2ab29a8c6e4c5dffb5869c7",
+      "icons/folder-test-open.svg": "afce5e13e844c387df7ea71faadde828a7b70a12c81643ca8cb54525b9ff567f",
+      "icons/folder-test.svg": "2294bee871758ce06138c3225c6d12c1e27c35cbd899c54dadf2079e682421bf",
+      "icons/folder.svg": "0d49ed148c416399f690bf557297237cf52e3b7ba2ffa81b295d84257d49e665",
+      "icons/git.svg": "0dc84c2782c6f41491226f40d3e2e812fffb32315f41fd4c1711134c665943ab",
+      "icons/go.svg": "7b94722e950b3c1b3033ab4138b93c4f0cf562dc0fc69a9b71412fd731ee3312",
+      "icons/gql.svg": "6c8126e62dc499bbd032f16a585e00ce3be6e612f1c524d3caa522c6eb0cdd69",
+      "icons/h.svg": "3dbd2010720a943cdbd12b7526f24127203254a36ae22536cabe4e6b4934579c",
+      "icons/hpp.svg": "3b2a559fdf9a6b19ed62f55c8e5a0bf75be43ed9ea3c91f0aa5d65064a2973f4",
+      "icons/html.svg": "7c81437d31b6f0371e48c76ee3dcbed150bd8b775bed2e798cc4e34362ec3515",
+      "icons/img.svg": "702c5bc51bb815ea5faf9628ba6244a59a3e8fe3123f3305b0e05fb886167b93",
+      "icons/java.svg": "5a95c2a211eb400f5fed1df08226322dcf849785afab849c2d50d8f995e04937",
+      "icons/js.svg": "9c5ca30e70dcc957c0634cdfd95ee0fd9b72dabc54b22a7c746642a1c9e99f7f",
+      "icons/json.svg": "8b17b6c0731e7795405a87f0374a940629174dd25c46cd53738f23b872f0004a",
+      "icons/jsx.svg": "6a8ff6d36864552ba0f5c7a839740af8a331644c9723a32b70221ca06e6da7bb",
+      "icons/kt.svg": "0142f98f815c7b986c1a7a7013d30c06c9ec2e0c378085b31df607b9b13d0443",
+      "icons/license.svg": "29ffa7cc9e8ceafb83984592d2aae985d90c650b5b44b3496a0ff5e46874f623",
+      "icons/log.svg": "32188ebe5b345b1f37765fbb4f6b0687b13677fd1c5acfe760344af942ab34be",
+      "icons/lua.svg": "b5ef95d106292bf999cb55ce94c472cd8659f9df4f403b49cb8e5bd0c93c82fc",
+      "icons/m.svg": "1205fde30bf4fc0e828efd2e979d3ebe199a17da1983e9acad9eb02a1d73c85b",
+      "icons/make.svg": "2bc7e70c83679991bfe76d0a78a250227f1fa5f06db6586dfca49e0b3c02a99c",
+      "icons/md.svg": "fac3f03c5e332f4ba8f4fc7fd6ba17ce701609c8d48f8f6cec2107c0ae353871",
+      "icons/npm.svg": "0c9c857e97c00f3b3d72da78085248730e909dc328fe21a541e1bd147c4a438b",
+      "icons/pdf.svg": "77b0848126941b7f68726e739731a7c954966585e285a4f16528c01e463c316e",
+      "icons/php.svg": "0c7d0e30d60094614fc2bfabf7305438e5f4ec6a1f7bcc7de96b2f24c22fb64f",
+      "icons/ps.svg": "6fa39912189f8980164128f5f4d4b812354366848af955b1e9903c199c46278e",
+      "icons/py.svg": "314942fda6028523a745357cdab89d1578760739c688bc49564a3e05085997b0",
+      "icons/rb.svg": "b45881d4a9519b6d5823127df15390fce9b9e59411b3ea243ebda0dd01af347a",
+      "icons/rs.svg": "363b1a81799fa4be11f99ecae234a06db066806baace27db7d97701874434205",
+      "icons/scss.svg": "d2a050ad79d436b117e39d6955d048997cfafbe48a5d35d5b2e9d1033c04e8b0",
+      "icons/sh.svg": "f452db3e936253375047f2b656099ac83a99f4238ed1e4bd5edc14608ed8bd61",
+      "icons/sql.svg": "e8b53580dee902add72227230dfdeed362eccb78b8723dc5340e33eddb9df38c",
+      "icons/svelte.svg": "42dfe8034aa83d50a743053b3c8acc01b80c045461d380edd1c5a6cd9cf9f884",
+      "icons/svg.svg": "3f17f4a754de656a66b4595ee1f44d9b357a4b34f05805bdfadca42d7bf74557",
+      "icons/swift.svg": "0bea984667a69d3cf24e2709d9209f40575fd3664530cf2a3cda929456550926",
+      "icons/toml.svg": "f1794764ba289f4340ee53a03d97fc122d7afc5b6c5fccb679811dced54996eb",
+      "icons/ts.svg": "628502770f65ec789115770197170a5cdb7bd2f42c5703a8c47f69c4fb56ed4e",
+      "icons/tsx.svg": "e35398a626323e48884a6a3e2a225b851273b51aa7b47259055c6de025902573",
+      "icons/vue.svg": "71beafcf44ba2ad0a1a77aed0981b5e42ec066bd5f1a85075044d890aeb44b6d",
+      "icons/xml.svg": "38e1fb5eab22c52183d09a2efec733cb2d6eb3b60fbd38413e8c352da4c05088",
+      "icons/yaml.svg": "0db1ad8ff7df83191a1b595bd168d23b4ef387720d20e074a4d926e8d45eb21b",
+      "icons/zig.svg": "e0c89a1ea4b83308149eb0dd1d8b1f04206bc83a927a183bf3359376ac033aeb",
+      "theme.json": "0e05e83d1ce56e68605aaaed68b7c1d08171b07786657827069b1ebc156b82cb"
+    }
   },
   {
     "id": "utm",
     "name": "Virtual Machines (UTM)",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Start, stop and suspend UTM virtual machines.",
     "icon": "desktopcomputer",
     "requires": [
       "/Applications/UTM.app/Contents/MacOS/utmctl"
     ],
-    "source": "https://github.com/nikiomori/kelp-extensions/tree/utm-1.0.0/extensions/utm"
+    "source": "https://github.com/nikiomori/kelp-extensions/tree/utm-1.0.1/extensions/utm",
+    "files": {
+      "README.md": "1d32cc1db1dee730da50b0d46dfef284b853b4892c980b7973c8c19487e76a48",
+      "RECIPE.md": "b15697d4307a46f3958d0b29cdae7b0539d16c063f60add1d1cfc0021fd38ec1",
+      "extension.json": "f9ab188c59d27ddd138e1c67ea28ce52bee3f7b6d0f5f272c3441fd492675856"
+    }
+  },
+  {
+    "id": "yazi",
+    "name": "Yazi",
+    "version": "1.0.0",
+    "description": "Yazi, the terminal file manager, in a tab on the workspace's folder.",
+    "icon": "folder",
+    "requires": [
+      "yazi"
+    ],
+    "source": "https://github.com/nikiomori/kelp-extensions/tree/yazi-1.0.0/extensions/yazi",
+    "files": {
+      "README.md": "914e1cbfdf89149c5e312a2a769ebb89f5c0a40ed4f1e86cb01be5850af00f47",
+      "RECIPE.md": "419f24c04f5e97d8fbdfd3d0e7a9fdfa1e6099d093fe8df692266a5173f2a92e",
+      "extension.json": "29308eb1503bbddf2bd20b7de8e564fe109de716f879aec7cf0d6d42fe56f3d0"
+    }
   }
 ]

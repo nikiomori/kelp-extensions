@@ -1,7 +1,7 @@
 {
   "id": "reprise",
   "name": "Reprise",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Calls recorded with Reprise: read the transcript, play the call, have an agent sum it up.",
   "icon": "waveform",
   "requires": [

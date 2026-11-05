@@ -1,0 +1,19 @@
+{
+  "id": "lazygit",
+  "name": "lazygit",
+  "version": "1.0.0",
+  "description": "lazygit, the git TUI, in a tab on the workspace's folder.",
+  "icon": "arrow.triangle.branch",
+  "requires": [
+    "lazygit"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "id": "lazygit.open",
+        "title": "Open lazygit",
+        "terminal": "lazygit"
+      }
+    ]
+  }
+}
