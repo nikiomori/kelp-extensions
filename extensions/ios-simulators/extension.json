@@ -1,7 +1,7 @@
 {
   "id": "ios-simulators",
   "name": "iOS Simulators",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Boot, open and erase simulators; stream their logs.",
   "icon": "iphone",
   "requires": [

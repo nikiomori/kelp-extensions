@@ -1,7 +1,7 @@
 {
   "id": "utm",
   "name": "Virtual Machines (UTM)",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Start, stop and suspend UTM virtual machines.",
   "icon": "desktopcomputer",
   "requires": [

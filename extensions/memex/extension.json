@@ -1,0 +1,24 @@
+{
+  "id": "memex",
+  "name": "Memex",
+  "version": "1.0.0",
+  "description": "Search and browse what your agents said before, across projects.",
+  "icon": "magnifyingglass",
+  "requires": [
+    "memex"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "id": "memex.browse",
+        "title": "Browse Agent History",
+        "terminal": "memex"
+      },
+      {
+        "id": "memex.index",
+        "title": "Index Agent History",
+        "terminal": "memex index"
+      }
+    ]
+  }
+}

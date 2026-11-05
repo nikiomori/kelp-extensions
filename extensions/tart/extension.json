@@ -1,7 +1,7 @@
 {
   "id": "tart",
   "name": "Virtual Machines (Tart)",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "macOS and Linux VMs with Tart: run, stop, SSH in.",
   "icon": "shippingbox.circle",
   "requires": [
