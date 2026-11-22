@@ -1,7 +1,7 @@
 {
   "id": "android-emulators",
   "name": "Android Emulators",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Launch AVDs, cold boot or wipe them; adb devices and logcat.",
   "icon": "candybarphone",
   "requires": [

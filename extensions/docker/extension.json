@@ -1,7 +1,7 @@
 {
   "id": "docker",
   "name": "Docker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Containers: logs, a shell inside, start / stop, and compose.",
   "icon": "shippingbox",
   "requires": [

@@ -1,0 +1,19 @@
+{
+  "id": "clauth",
+  "name": "clauth",
+  "version": "1.0.0",
+  "description": "Claude Code accounts: switch, and watch each one's 5-hour and weekly usage.",
+  "icon": "person.2",
+  "requires": [
+    "clauth"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "id": "clauth.open",
+        "title": "Claude Code Accounts",
+        "terminal": "clauth"
+      }
+    ]
+  }
+}

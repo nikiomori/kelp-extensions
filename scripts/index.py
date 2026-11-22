@@ -7,8 +7,9 @@
     python3 scripts/index.py --tag                   check, then tag each extension <id>-<version> (what main runs)
 
 Each index entry points at the tag <id>-<version>: the last commit that changed the extension's folder, so Kelp
-installs exactly what was reviewed. The index can then go in the same commit as the extension. Standard library only.
+installs exactly what was reviewed, and lists each file's SHA-256: Kelp refuses a download whose bytes differ. The index can then go in the same commit as the extension. Standard library only.
 """
+import hashlib
 import json
 import os
 import re
@@ -65,6 +66,18 @@ def problems(folder, m):
     return out
 
 
+def hashes(folder):
+    """Each file's SHA-256 by its path in the folder: Kelp installs these bytes or nothing."""
+    top = os.path.join(ROOT, "extensions", folder)
+    out = {}
+    for dirpath, _, files in os.walk(top):
+        for name in files:
+            path = os.path.join(dirpath, name)
+            with open(path, "rb") as f:
+                out[os.path.relpath(path, top)] = hashlib.sha256(f.read()).hexdigest()
+    return dict(sorted(out.items()))
+
+
 def version_problems(base, folder, m):
     """An extension changed since `base` needs a version it didn't have there."""
     if not git("diff", "--name-only", f"{base}...HEAD", "--", f"extensions/{folder}"):
@@ -110,7 +123,8 @@ def main():
         failed = failed or bool(found)
         if not found:
             entries.append({k: m[k] for k in ("id", "name", "version", "description", "icon", "requires") if k in m}
-                           | {"source": f"https://github.com/{REPO}/tree/{folder}-{m['version']}/extensions/{folder}"})
+                           | {"source": f"https://github.com/{REPO}/tree/{folder}-{m['version']}/extensions/{folder}",
+                              "files": hashes(folder)})
     if failed:
         sys.exit(1)
     index = json.dumps(entries, indent=2, ensure_ascii=False) + "\n"

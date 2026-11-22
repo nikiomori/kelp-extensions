@@ -1,0 +1,19 @@
+{
+  "id": "yazi",
+  "name": "Yazi",
+  "version": "1.0.0",
+  "description": "Yazi, the terminal file manager, in a tab on the workspace's folder.",
+  "icon": "folder",
+  "requires": [
+    "yazi"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "id": "yazi.open",
+        "title": "Open Yazi",
+        "terminal": "yazi"
+      }
+    ]
+  }
+}

@@ -9,7 +9,18 @@ Extensions for Kelp, the native macOS IDE for coding agents, shared by the peopl
 - **From a terminal or an agent:** `kelp ext search` lists them, `kelp ext install docker` installs one,
   `kelp ext update` brings them up to date.
 
-Before installing, Kelp shows which commands the extension can run on your Mac.
+Before installing, Kelp shows which commands the extension can run on your Mac. It installs exactly the files that
+were reviewed: `index.json` lists each one's SHA-256, and a download whose bytes differ is refused.
+
+**With an agent:** each extension has a `RECIPE.md` with the sentence to say, e.g. "Add the Docker extension to Kelp:
+run `kelp ext install docker`."
+
+## Not reviewed: the kelp-extension topic
+
+Give your own repository the GitHub topic `kelp-extension` (with `extension.json` at its top) and Kelp's library lists
+it under "From GitHub · not reviewed", fastest growing first. `scripts/community.py` writes that list, `community.json`,
+once a day; nobody here has read those, so Kelp shows every command one runs before installing it. Any repository also
+installs directly: `kelp ext install owner/repo`.
 
 ## Add yours
 
@@ -21,6 +32,7 @@ Kelp (Claude Code) writes one when you ask for it.
    - `extension.json` — its `id` is the folder's name; `name`, `version` (`1.0.0`) and `description` are required.
      List the commands it needs in `requires` (e.g. `["docker"]`).
    - `README.md` — what it adds and what it needs.
+   - `RECIPE.md` — what to say to an agent to install it (copy one from another extension).
    - Any HTML or scripts it uses. No binaries, symlinks or files over 1 MB.
 2. Try it: `kelp ext install ./extensions/<id>`.
 3. Run `python3 scripts/index.py`: it checks every extension and writes `index.json`. Commit that with your extension.
