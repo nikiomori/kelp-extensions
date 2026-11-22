@@ -1,0 +1,99 @@
+{
+  "id": "ollama",
+  "name": "Ollama",
+  "version": "1.0.0",
+  "description": "Models in Ollama: what is on disk and in memory; start Claude Code or Codex on one, chat, unload, pull, remove.",
+  "icon": "cube",
+  "requires": [
+    "ollama"
+  ],
+  "contributes": {
+    "panels": [
+      {
+        "id": "models",
+        "title": "Ollama",
+        "icon": "cube",
+        "badge": {
+          "command": "curl -sf -m 1 http://127.0.0.1:11434/api/ps | jq '.models | length | select(. > 0)'",
+          "refresh": 30
+        },
+        "list": {
+          "command": "api=http://127.0.0.1:11434/api\ncurl -sf -m 1 $api/version >/dev/null || ollama ps >/dev/null 2>&1\ntags=$(curl -sf -m 3 $api/tags) || { print -u2 \"Ollama doesn't answer on 127.0.0.1:11434. Open the Ollama app, then try again.\"; exit 1; }\nps=$(curl -sf -m 3 $api/ps)\ncaps=$(print -r -- $tags | jq -r '.models[].name' | while read -r m; do\n  curl -sf -m 3 $api/show -d \"$(jq -nc --arg m $m '{model: $m}')\" | jq -c --arg m $m '{($m): (.capabilities // [])}'\ndone | jq -sc 'add // {}')\njq -nc --argjson t \"$tags\" --argjson p \"$ps\" --argjson c \"$caps\" --arg s ${setting:editor.suggestionModel} '\n  def size: if . >= 1e9 then \"\\(. / 1e8 | round / 10) GB\" else \"\\(. / 1e6 | round) MB\" end;\n  def words: [.[] | select(. != \"completion\") | if . == \"insert\" then \"fill-in\" else . end] | join(\", \");\n  ($p.models // [] | map({(.name): .size_vram}) | add // {}) as $mem\n  | $t.models | map(\n      .name as $n | ($mem[$n]) as $m\n      | {name: $n, loaded: ($m != null),\n         title: ($n | split(\"/\") | last | sub(\"-GGUF\"; \"\")),\n         tools: (($c[$n] // []) | index(\"tools\") != null),\n         subtitle: ([ (if $n == $s then \"Code suggestions\" else empty end),\n                      (if $m != null then \"In memory \\($m | size)\" else (.size | size) end),\n                      (($c[$n] // []) | words | select(. != \"\")) ] | join(\" · \"))})\n  | sort_by((.loaded | not), (.title | ascii_downcase)) | .[] | .state = (if .loaded then \"loaded\" else \"disk\" end)'",
+          "refresh": 5,
+          "title": "${title}",
+          "subtitle": "${subtitle}",
+          "status": {
+            "field": "state",
+            "map": {
+              "loaded": "working"
+            }
+          },
+          "empty": "No Models Yet",
+          "actions": [
+            {
+              "title": "Start Claude Code",
+              "icon": "terminal",
+              "if": "tools",
+              "session": {
+                "agent": "claude",
+                "model": "${name}",
+                "env": {
+                  "ANTHROPIC_BASE_URL": "http://127.0.0.1:11434",
+                  "ANTHROPIC_AUTH_TOKEN": "ollama",
+                  "ANTHROPIC_API_KEY": ""
+                }
+              }
+            },
+            {
+              "title": "Start Codex",
+              "icon": "terminal",
+              "if": "tools",
+              "session": {
+                "agent": "codex",
+                "model": "${name}",
+                "args": [
+                  "--oss",
+                  "--local-provider",
+                  "ollama"
+                ]
+              }
+            },
+            {
+              "title": "Chat in Terminal",
+              "icon": "text.bubble",
+              "terminal": "ollama run \"$KELP_name\""
+            },
+            {
+              "title": "Unload from Memory",
+              "icon": "eject",
+              "if": "loaded",
+              "run": "ollama stop \"$KELP_name\""
+            },
+            {
+              "title": "Show Details",
+              "icon": "info.circle",
+              "terminal": "ollama show \"$KELP_name\""
+            },
+            {
+              "title": "Remove…",
+              "icon": "trash",
+              "confirm": "Remove ${title} from this Mac?",
+              "run": "ollama rm \"$KELP_name\""
+            }
+          ],
+          "toolbar": [
+            {
+              "title": "Pull Model…",
+              "terminal": "printf \"Model to pull (names on ollama.com/search): \"; read -r m && [ -n \"$m\" ] && ollama pull \"$m\""
+            },
+            {
+              "title": "Find Models on ollama.com",
+              "icon": "magnifyingglass",
+              "open": "https://ollama.com/search"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
