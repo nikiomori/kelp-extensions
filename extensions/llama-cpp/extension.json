@@ -1,0 +1,102 @@
+{
+  "id": "llama-cpp",
+  "name": "llama.cpp",
+  "version": "1.0.0",
+  "description": "llama-server: the servers running on this Mac and the GGUF models downloaded for them; start a server, open its page, start Claude Code on it.",
+  "icon": "server.rack",
+  "contributes": {
+    "settings": [
+      {
+        "key": "llamacpp.server",
+        "title": "llama-server",
+        "type": "string",
+        "default": "llama-server",
+        "description": "Its name on PATH, or its full path if you built llama.cpp yourself."
+      }
+    ],
+    "panels": [
+      {
+        "id": "servers",
+        "title": "llama.cpp",
+        "icon": "server.rack",
+        "badge": {
+          "command": "pgrep -f '(^|/)llama-server( |$)' | while read -r p; do ps -o comm= -p $(ps -o ppid= -p $p) | grep -qvE 'kelpd|ollama' && echo; done | wc -l | tr -d ' ' | grep -v '^0$'",
+          "refresh": 30
+        },
+        "list": {
+          "command": "hub=$HOME/.cache/huggingface/hub\n[[ -n $HF_HOME ]] && hub=$HF_HOME/hub\n[[ -n $HF_HUB_CACHE ]] && hub=$HF_HUB_CACHE\ngb() { jq -nr --argjson b $1 'if $b >= 1e9 then \"\\($b / 1e8 | round / 10) GB\" else \"\\($b / 1e6 | round) MB\" end'; }\nserved=()\nfor pid in $(pgrep -f '(^|/)llama-server( |$)'); do\n  args=$(ps -o args= -p $pid)\n  port=$(lsof -nP -a -p $pid -iTCP -sTCP:LISTEN -Fn 2>/dev/null | sed -nE 's/^n.*:([0-9]+)$/\\1/p' | head -1)\n  owner=$(ps -o comm= -p $(ps -o ppid= -p $pid))\n  [[ $owner == */ollama || $owner == ollama ]] && continue   # Ollama's own runner: the Ollama panel shows it\n  props=null slots=null\n  if [[ -n $port ]]; then\n    props=$(curl -sf -m 1 http://127.0.0.1:$port/props) || props=null\n    slots=$(curl -sf -m 1 http://127.0.0.1:$port/slots) || slots=null\n  fi\n  file=$(print -r -- $props | jq -r '.model_path // empty')\n  [[ -n $file ]] && served+=$file:A\n  size=0; [[ -f $file ]] && size=$(stat -Lf %z $file)\n  jq -nc --arg pid $pid --arg port $port --arg file \"$file\" --arg size \"$( (( size > 0 )) && gb $size)\" --arg owner \"$owner\" \\\n    --argjson props \"$props\" --argjson slots \"$slots\" '\n    ($owner | test(\"kelpd\")) as $kelp\n    | {kind: \"server\", server: true, cached: false, stoppable: ($kelp | not), pid: $pid, port: $port, file: $file, kelp: $kelp, state: \"running\", icon: \"server.rack\",\n       title: ($file | split(\"/\") | last // \"\" | sub(\"\\\\.gguf$\"; \"\") | if . == \"\" then \"llama-server\" else . end),\n       subtitle: ([ (if $kelp then \"Kelp · next edit\" else empty end),\n                    ($slots | if type == \"array\" and any(.[]; .is_processing) then \"Answering\" else empty end),\n                    (if $port == \"\" then \"Starting…\" else \"Port \\($port)\" end),\n                    ($props.default_generation_settings.n_ctx // $props.n_ctx // empty | \"\\(. / 1024 | floor)K context\")\n                    ] | join(\" · \"))}'\ndone\nfind $hub -path '*/snapshots/*' -name '*.gguf' ! -name 'mmproj*' 2>/dev/null | sort | while read -r f; do\n  print -rl -- $served | grep -qxF -- $f:A && continue\n  repo=$(print -r -- $f | sed -E 's|.*/models--([^/]*)--([^/]*)/snapshots/.*|\\1/\\2|')\n  jq -nc --arg file $f --arg repo $repo --arg size \"$(gb $(stat -Lf %z $f))\" '\n    {kind: \"file\", server: false, cached: true, stoppable: false, pid: \"\", port: \"\", file: $file, kelp: false, state: \"file\", icon: \"doc\",\n     title: ($file | split(\"/\") | last | sub(\"\\\\.gguf$\"; \"\")), subtitle: \"\\($size) · \\($repo | sub(\"-GGUF$\"; \"\"))\"}'\ndone",
+          "refresh": 5,
+          "title": "${title}",
+          "subtitle": "${subtitle}",
+          "icon": "${icon}",
+          "status": {
+            "field": "state",
+            "map": {
+              "running": "working"
+            }
+          },
+          "empty": "No Servers or Models",
+          "actions": [
+            {
+              "title": "Open in Browser",
+              "icon": "safari",
+              "if": "server",
+              "open": "http://127.0.0.1:${port}"
+            },
+            {
+              "title": "Start Server",
+              "icon": "play.fill",
+              "if": "cached",
+              "terminal": "p=8080; while nc -z 127.0.0.1 $p 2>/dev/null; do p=$((p+1)); done; ${setting:llamacpp.server} -m \"$KELP_file\" --jinja -c 32768 --port $p"
+            },
+            {
+              "title": "Start Claude Code",
+              "icon": "terminal",
+              "if": "server",
+              "session": {
+                "agent": "claude",
+                "model": "${title}",
+                "env": {
+                  "ANTHROPIC_BASE_URL": "http://127.0.0.1:${port}",
+                  "ANTHROPIC_AUTH_TOKEN": "llama.cpp",
+                  "ANTHROPIC_API_KEY": ""
+                }
+              }
+            },
+            {
+              "title": "Stop Server…",
+              "icon": "stop.fill",
+              "if": "stoppable",
+              "confirm": "Stop the server on ${title}?",
+              "run": "kill \"$KELP_pid\""
+            },
+            {
+              "title": "Show in Finder",
+              "icon": "folder",
+              "if": "file",
+              "run": "open -R \"$KELP_file\""
+            },
+            {
+              "title": "Move to Trash…",
+              "icon": "trash",
+              "if": "cached",
+              "confirm": "Move ${title} to the Trash?",
+              "run": "trash \"$(readlink -f \"$KELP_file\")\" && rm \"$KELP_file\""
+            }
+          ],
+          "toolbar": [
+            {
+              "title": "Download Model…",
+              "terminal": "p=8080; while nc -z 127.0.0.1 $p 2>/dev/null; do p=$((p+1)); done; printf \"Model on Hugging Face (user/repo:quant): \"; read -r m && [ -n \"$m\" ] && ${setting:llamacpp.server} -hf \"$m\" --jinja -c 32768 --port $p"
+            },
+            {
+              "title": "Find GGUF Models on Hugging Face",
+              "icon": "magnifyingglass",
+              "open": "https://huggingface.co/models?library=gguf&sort=trending"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

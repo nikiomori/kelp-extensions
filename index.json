@@ -34,6 +34,14 @@
     "source": "https://github.com/nikiomori/kelp-extensions/tree/ios-simulators-1.0.0/extensions/ios-simulators"
   },
   {
+    "id": "llama-cpp",
+    "name": "llama.cpp",
+    "version": "1.0.0",
+    "description": "llama-server: the servers running on this Mac and the GGUF models downloaded for them; start a server, open its page, start Claude Code on it.",
+    "icon": "server.rack",
+    "source": "https://github.com/nikiomori/kelp-extensions/tree/llama-cpp-1.0.0/extensions/llama-cpp"
+  },
+  {
     "id": "make",
     "name": "Make",
     "version": "1.0.0",
@@ -43,6 +51,17 @@
       "make"
     ],
     "source": "https://github.com/nikiomori/kelp-extensions/tree/make-1.0.0/extensions/make"
+  },
+  {
+    "id": "ollama",
+    "name": "Ollama",
+    "version": "1.0.0",
+    "description": "Models in Ollama: what is on disk and in memory; start Claude Code or Codex on one, chat, unload, pull, remove.",
+    "icon": "cube",
+    "requires": [
+      "ollama"
+    ],
+    "source": "https://github.com/nikiomori/kelp-extensions/tree/ollama-1.0.0/extensions/ollama"
   },
   {
     "id": "ports",
